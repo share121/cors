@@ -16,6 +16,11 @@ export default {
 		const url = new URL(request.url);
 		const href = url.pathname.slice(1) + url.search + url.hash;
 		console.log(href);
-		return fetch(new Request(href, request));
+		const resp = await fetch(new Request(href, request));
+		resp.headers.set('Access-Control-Allow-Credentials', 'true');
+		resp.headers.set('Access-Control-Allow-Headers', '*');
+		resp.headers.set('Access-Control-Allow-Methods', '*');
+		resp.headers.set('Access-Control-Allow-Origin', '*');
+		return resp;
 	},
 } satisfies ExportedHandler<Env>;
