@@ -12,8 +12,10 @@
  */
 
 export default {
-	async fetch(request, env, ctx): Promise<Response> {
-		request.
-		return new Response('Hello World!');
+	async fetch(request): Promise<Response> {
+		const url = new URL(request.url);
+		const href = url.pathname.slice(1) + url.search + url.hash;
+		console.log(href);
+		return fetch(new Request(href, request));
 	},
 } satisfies ExportedHandler<Env>;
