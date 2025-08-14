@@ -17,10 +17,11 @@ export default {
 		const href = url.pathname.slice(1) + url.search + url.hash;
 		console.log(href);
 		const resp = await fetch(new Request(href, request));
-		resp.headers.set('Access-Control-Allow-Credentials', 'true');
-		resp.headers.set('Access-Control-Allow-Headers', '*');
-		resp.headers.set('Access-Control-Allow-Methods', '*');
-		resp.headers.set('Access-Control-Allow-Origin', '*');
-		return resp;
+		const newResp = new Response(resp.body, resp);
+		newResp.headers.set('Access-Control-Allow-Credentials', 'true');
+		newResp.headers.set('Access-Control-Allow-Headers', '*');
+		newResp.headers.set('Access-Control-Allow-Methods', '*');
+		newResp.headers.set('Access-Control-Allow-Origin', '*');
+		return newResp;
 	},
 } satisfies ExportedHandler<Env>;
