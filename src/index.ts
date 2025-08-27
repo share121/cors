@@ -16,7 +16,7 @@ export default {
 		const url = new URL(request.url);
 		const href = url.pathname.slice(1) + url.search + url.hash;
 		console.log(href);
-		const resp = await fetch(new Request(href, request));
+		const resp = await fetch(href, request);
 		const newResp = new Response(resp.body, resp);
 		newResp.headers.set('Access-Control-Allow-Credentials', 'true');
 		newResp.headers.set('Access-Control-Allow-Headers', '*');
